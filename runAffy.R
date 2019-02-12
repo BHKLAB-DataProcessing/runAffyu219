@@ -1,7 +1,7 @@
 warning("Where is my logs?")
 library(affy)
 library(downloader)
-# library(PharmacoGxPrivate)
+library(PharmacoGxPrivate)
 file.paths <- file.path("/pfs/BrainArray/",c(list.files(pattern="hgu219hsensg*", path="/pfs/BrainArray/"),
                 list.files(pattern="pd.hgu219.hs.ensg*", path="/pfs/BrainArray/")))
 
