@@ -2,8 +2,8 @@ warning("Where is my logs?")
 library(affy)
 library(downloader)
 library(PharmacoGxPrivate)
-file.paths <- file.path("/pfs/BrainArray/",c(list.files(pattern="hgu219hsensg*", path="/pfs/BrainArray/"),
-                list.files(pattern="pd.hgu219.hs.ensg*", path="/pfs/BrainArray/")))
+file.paths <- file.path("/pfs/input/",c(list.files(pattern="hgu219hsensg*", path="/pfs/input/"),
+                list.files(pattern="pd.hgu219.hs.ensg*", path="/pfs/input/")))
 
 install.packages(file.paths, repos=NULL, type="source")
 ftpdir <- "ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-3610/"
@@ -12,9 +12,9 @@ ftpdir <- "ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-M
 dwl.status <- download(url=sprintf("%s/E-MTAB-3610.sdrf.txt", ftpdir), destfile=file.path("/pfs/out", "E-MTAB-3610.sdrf.txt"), quiet=TRUE)
 sampleinfo <- read.csv(file.path("/pfs/out", "E-MTAB-3610.sdrf.txt"), sep="\t", stringsAsFactors=FALSE)
 
-load("/pfs/gdscU219/celfile_timestamp.RData")
+load("/pfs/input/celfile_timestamp.RData")
 
-celfn <- list.files(pattern="*.cel.gz", path="/pfs/gdscU219/")
+celfn <- list.files(pattern="*.cel.gz", path="/pfs/input/")
 
 cgp.u219 <- just.rma(filenames=celfn, cdfname="hgu219hsensgcdf")
 save(cgp.u219, compress=TRUE, file="GDSC_U219_ENSG_RAW.RData")
