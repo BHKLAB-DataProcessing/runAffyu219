@@ -14,7 +14,7 @@ sampleinfo <- read.csv(file.path("/pfs/out", "E-MTAB-3610.sdrf.txt"), sep="\t", 
 
 load("/pfs/gdscU219/celfile_timestamp.RData")
 
-celfn <- list.files(pattern="*.cel.gz", path="/pfs/gdscU219/")
+celfn <- list.files(pattern="*.cel.gz", path="/pfs/gdscU219/", full.names=TRUE)
 
 cgp.u219 <- just.rma(filenames=celfn, cdfname="hgu219hsensgcdf")
 save(cgp.u219, compress=TRUE, file="GDSC_U219_ENSG_RAW.RData")
