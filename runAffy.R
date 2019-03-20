@@ -1,4 +1,3 @@
-warning("Where is my logs?")
 library(affy)
 library(downloader)
 library(PharmacoGxPrivate)
@@ -19,7 +18,7 @@ rownames(celfile.timestamp) <- basename(rownames(celfile.timestamp))
 celfn <- list.files(pattern="*.cel.gz", path="/pfs/gdscU219/", full.names=TRUE)
 
 cgp.u219 <- just.rma(filenames=celfn, cdfname="hgu219hsensgcdf")
-save(cgp.u219, compress=TRUE, file="GDSC_U219_ENSG_RAW.RData")
+save(cgp.u219, compress=TRUE, file="/pfs/out/GDSC_U219_ENSG_RAW.RData")
 print(head(rownames(pData(cgp.u219))))
 pData(cgp.u219) <- data.frame(pData(cgp.u219), sampleinfo[match(colnames(exprs(cgp.u219)), sampleinfo[ , "Array.Data.File"]), , drop=FALSE], celfile.timestamp[rownames(pData(cgp.u219)), , drop=FALSE])
 colnames(exprs(cgp.u219)) <- rownames(pData(cgp.u219)) <- colnames(exprs(cgp.u219))
