@@ -14,12 +14,14 @@ sampleinfo <- read.csv(file.path("/pfs/out", "E-MTAB-3610.sdrf.txt"), sep="\t", 
 load("/pfs/gdscU219/celfile_timestamp.RData")
 
 rownames(celfile.timestamp) <- basename(rownames(celfile.timestamp))
+rownames(celfile.timestamp) <- gsub(rownames(celfile.timestamp), pat=".gz", rep="", fixed=TRUE)
 
 celfn <- list.files(pattern="*.cel.gz", path="/pfs/gdscU219/", full.names=TRUE)
 
 cgp.u219 <- just.rma(filenames=celfn, cdfname="hgu219hsensgcdf")
 save(cgp.u219, compress=TRUE, file="/pfs/out/GDSC_U219_ENSG_RAW.RData")
 print(head(rownames(pData(cgp.u219))))
+colnames(cgp.u219) <- gsub(colnames(cgp.u219), pat=".gz", rep="", fixed=TRUE)
 pData(cgp.u219) <- data.frame(pData(cgp.u219), sampleinfo[match(colnames(exprs(cgp.u219)), sampleinfo[ , "Array.Data.File"]), , drop=FALSE], celfile.timestamp[rownames(pData(cgp.u219)), , drop=FALSE])
 colnames(exprs(cgp.u219)) <- rownames(pData(cgp.u219)) <- colnames(exprs(cgp.u219))
 fData(cgp.u219) <- data.frame("PROBE"=rownames(exprs(cgp.u219)), "GENEID"=sapply(strsplit(rownames(exprs(cgp.u219)), "_"), function (x) { return (x[[1]]) }), "BEST"=TRUE)
