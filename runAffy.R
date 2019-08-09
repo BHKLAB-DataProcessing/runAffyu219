@@ -28,7 +28,7 @@ fData(cgp.u219) <- data.frame("PROBE"=rownames(exprs(cgp.u219)), "GENEID"=sapply
 rownames(fData(cgp.u219)) <- rownames(exprs(cgp.u219))
 cgp.u219.ensg <- cgp.u219
 
-experimentData(cgp.u133a.ensg)@preprocessing <- list(Normalisation=list(name="rma", package="affy", version=as.character(packageVersion("affy"))), "Annotation" = list(name="brainarray", package="hgu219hsensgcdf", version=as.character(packageVersion("hgu219hsensgcdf")))) 
+experimentData(cgp.u219.ensg)@preprocessing <- list(Normalisation=list(name="rma", package="affy", version=as.character(packageVersion("affy"))), "Annotation" = list(name="brainarray", package="hgu219hsensgcdf", version=as.character(packageVersion("hgu219hsensgcdf")))) 
 
 
 save(cgp.u219.ensg, compress=TRUE, file="/pfs/out/GDSC_U219_ENSG.RData")
